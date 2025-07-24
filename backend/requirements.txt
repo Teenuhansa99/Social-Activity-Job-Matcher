@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+PyMuPDF
+sentence-transformers
+torch  # Required for sentence-transformers

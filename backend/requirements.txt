@@ -6,3 +6,4 @@ scikit-learn
 PyMuPDF
 sentence-transformers
 torch  # Required for sentence-transformers
+python-multipart

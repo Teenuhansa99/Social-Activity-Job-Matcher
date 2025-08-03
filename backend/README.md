@@ -40,8 +40,18 @@ cd social-activity-job-matcher/backend
 It is recommended to use a virtual environment.
 
 ```bash
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Activate virtual environment
+# For Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+# For Windows Command Prompt (cmd.exe):
+.\venv\Scripts\activate.bat
+# For Unix/Linux/MacOS:
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 

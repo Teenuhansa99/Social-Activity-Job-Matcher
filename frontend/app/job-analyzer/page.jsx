@@ -184,12 +184,23 @@ const JobAnalyzer = () => {
                                                 <span className="text-red-400">{job.error}</span>
                                             ) : (
                                                 <>
-                                                    <div className="text-white font-semibold">{job.title || job.position || 'No Title'}</div>
+                                                    <div className="text-white font-semibold">{job.positionName || job.title || job.position || 'No Title'}</div>
                                                     <div className="text-gray-300 text-sm">{job.company || job.companyName || ''}</div>
                                                     <div className="text-gray-400 text-xs mt-1">{job.location || ''}</div>
-                                                    {job.url && (
-                                                        <a href={job.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline text-xs">View Job</a>
+                                                    {job.jobType && Array.isArray(job.jobType) && job.jobType.length > 0 && (
+                                                        <div className="text-gray-400 text-xs mt-1">{job.jobType.join(', ')}</div>
                                                     )}
+                                                    {job.salary && (
+                                                        <div className="text-gray-400 text-xs mt-1">Salary: {job.salary}</div>
+                                                    )}
+                                                    {job.postedAt && (
+                                                        <div className="text-gray-400 text-xs mt-1">Posted: {job.postedAt}</div>
+                                                    )}
+                                                    {job.externalApplyLink ? (
+                                                        <a href={job.externalApplyLink} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline text-xs">Apply Externally</a>
+                                                    ) : job.url ? (
+                                                        <a href={job.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline text-xs">View Job</a>
+                                                    ) : null}
                                                 </>
                                             )}
                                         </div>

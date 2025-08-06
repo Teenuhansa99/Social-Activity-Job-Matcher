@@ -2,7 +2,7 @@
 
 PathFinder is a job recommendation web application that allows users to upload their social media activity documents (such as LinkedIn data exports in PDF format) and receive personalized job suggestions. The system leverages modern web technologies and natural language processing to match user profiles to relevant job roles using semantic similarity.
 
----
+
 
 ## Tech Stack
 
@@ -14,7 +14,7 @@ PathFinder is a job recommendation web application that allows users to upload t
 | Data       | Pandas, Numpy, scikit-learn |
 | PDF Parsing| PyMuPDF                   |
 
----
+
 
 ## Features
 
@@ -24,7 +24,7 @@ PathFinder is a job recommendation web application that allows users to upload t
 - Top 5 job recommendations with similarity scores
 - Responsive, modern UI
 
----
+
 
 ## Setup Instructions
 
@@ -71,7 +71,7 @@ PathFinder is a job recommendation web application that allows users to upload t
    ```
    Visit [http://localhost:3000](http://localhost:3000)
 
----
+
 
 ## Model Explanation
 
@@ -83,7 +83,7 @@ PathFinder is a job recommendation web application that allows users to upload t
   - Compared against precomputed job role embeddings
   - Top 5 jobs returned based on semantic similarity
 
----
+
 
 <!-- ## Team Roles
 
@@ -99,6 +99,12 @@ PathFinder is a job recommendation web application that allows users to upload t
 | Chamath Weerasinghe | 20210008   | Full Stack Developer|
 | Ruwani Abeysekara | 20210009     | Documentation Lead  |
 | Malith Senanayake | 20210010     | Research Analyst    | -->
+
+
+
+## License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](LICENSE). You are free to use, share, and adapt the code for non-commercial purposes with proper attribution.
 
 ---
 

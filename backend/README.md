@@ -84,10 +84,13 @@ You can test the endpoint using the built-in Swagger UI:
 
 > Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
+
 Upload a PDF containing social media activity (e.g., exported LinkedIn data) to `/recommend` endpoint and receive a JSON response with:
 
-- `recommendations`: Top 5 matched jobs
-- `top_job_details`: Live job listings for the top recommendation (from Apify)
+- `top_recommendation`: Best matched job
+- `recommendations`: Next 4 matched jobs
+
+To fetch live job listings for the top recommendation, call the `/live_jobs?position=<job_title>` endpoint. This allows the frontend to display model predictions immediately and load live job data asynchronously.
 
 
 

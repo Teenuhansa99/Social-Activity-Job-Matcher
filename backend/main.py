@@ -58,9 +58,11 @@ async def recommend(file: UploadFile = File(...)):
     top_indices = similarities.argsort()[::-1]  # Sorted all
 
 
+
     seen_titles = set()
     recommendations = []
     top_title = None
+    top_recommendation = None
 
     for i in top_indices:
         title = job_data["title"][i]
@@ -68,6 +70,10 @@ async def recommend(file: UploadFile = File(...)):
             seen_titles.add(title)
             if not top_title:
                 top_title = title
+                top_recommendation = {
+                    "title": title,
+                    "match_score": round(float(similarities[i]), 4)
+                }
             recommendations.append({
                 "title": title,
                 "match_score": round(float(similarities[i]), 4)
@@ -75,11 +81,19 @@ async def recommend(file: UploadFile = File(...)):
         if len(recommendations) >= 5:
             break
 
+    return {
+        "top_recommendation": top_recommendation,
+        "recommendations": recommendations[1:5]  # next 4
+    }
+
+
+@app.get("/live_jobs")
+async def live_jobs(position: str):
     job_details = []
-    if apify_client and top_title:
+    if apify_client and position:
         try:
             run_input = {
-                "position": top_title,
+                "position": position,
                 "maxItems": 5,
                 "parseCompanyDetails": False,
                 "saveOnlyUniqueItems": True,
@@ -90,11 +104,7 @@ async def recommend(file: UploadFile = File(...)):
                 job_details.append(item)
         except Exception as e:
             job_details = [{"error": str(e)}]
-
-    return {
-        "recommendations": recommendations,
-        "top_job_details": job_details
-    }
+    return {"jobs": job_details}
 
 
 if __name__ == "__main__":

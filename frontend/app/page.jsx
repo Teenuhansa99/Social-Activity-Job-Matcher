@@ -32,7 +32,7 @@ export default function Home() {
               variants={textVariant(1.2)}
               className="text-lg text-gray-300 max-w-2xl"
             >
-              Upload your LinkedIn profile and let our advanced AI analyze your skills, experience, and potential to find your perfect job match.
+              Upload your LinkedIn or other social media profile, and let our advanced AI analyze your skills, experience, and potential to find your perfect job match..
             </motion.p>
 
             <motion.div

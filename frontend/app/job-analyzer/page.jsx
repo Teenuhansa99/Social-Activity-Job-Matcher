@@ -30,7 +30,7 @@ const JobAnalyzer = () => {
         body: formData,
       });
 
-      if (!response.ok) throw new Error("Failed to analyze resume");
+      if (!response.ok) throw new Error("Failed to analyze");
 
       const data = await response.json();
       setTopRecommendation({
@@ -58,7 +58,7 @@ const JobAnalyzer = () => {
         .finally(() => setLoadingJobs(false));
     } catch (err) {
       console.error(err);
-      alert("Failed to analyze resume. Please try again.");
+      alert("Failed to analyze. Please try again.");
     } finally {
       setAnalyzing(false);
     }
@@ -110,7 +110,7 @@ const JobAnalyzer = () => {
                   : "bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
               } transition-all duration-300 text-white`}
             >
-              {analyzing ? "Analyzing..." : "Analyze Resume"}
+              {analyzing ? "Analyzing..." : "Analyze Profile"}
             </button>
           </div>
         </motion.div>
@@ -127,12 +127,12 @@ const JobAnalyzer = () => {
 
           {!results && !analyzing && (
             <div className="text-center text-gray-400 py-8">
-              Upload and analyze your resume to see job recommendations
+              Upload and analyze your profile to see job recommendations
             </div>
           )}
           {analyzing && (
             <div className="text-center text-gray-400 py-8">
-              Analyzing your resume...
+              Analyzing your profile...
             </div>
           )}
           {topRecommendation && (

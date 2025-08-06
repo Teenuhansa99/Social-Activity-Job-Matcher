@@ -136,7 +136,7 @@ PathFinder uses the [Apify Indeed Scraper](https://apify.com/misceres/indeed-scr
 
 This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](LICENSE). You are free to use, share, and adapt the code for non-commercial purposes with proper attribution.
 
----
+
 
 ## Contact
 

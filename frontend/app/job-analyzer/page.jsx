@@ -90,28 +90,30 @@ const JobAnalyzer = () => {
               id="fileInput"
               accept=".pdf"
             />
-            <label
-              htmlFor="fileInput"
-              className="cursor-pointer bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 text-white px-6 py-3 rounded-lg inline-block transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              Choose File
-            </label>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+              <label
+                htmlFor="fileInput"
+                className="cursor-pointer bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 text-white px-6 py-3 rounded-lg inline-block transition-all duration-300 border border-white/10 hover:border-white/20"
+              >
+                Choose File
+              </label>
+              <button
+                onClick={handleAnalyze}
+                disabled={!selectedFile || analyzing}
+                className={`px-6 py-3 rounded-lg w-full md:w-auto ${
+                  !selectedFile || analyzing
+                    ? "bg-white/10 cursor-not-allowed"
+                    : "bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
+                } transition-all duration-300 text-white`}
+              >
+                {analyzing ? "Analyzing..." : "Analyze Profile"}
+              </button>
+            </div>
             {selectedFile && (
               <p className="mt-4 text-gray-300 break-all">
                 Selected: {selectedFile.name}
               </p>
             )}
-            <button
-              onClick={handleAnalyze}
-              disabled={!selectedFile || analyzing}
-              className={`mt-6 px-6 py-3 rounded-lg w-full md:w-auto ${
-                !selectedFile || analyzing
-                  ? "bg-white/10 cursor-not-allowed"
-                  : "bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
-              } transition-all duration-300 text-white`}
-            >
-              {analyzing ? "Analyzing..." : "Analyze Profile"}
-            </button>
           </div>
         </motion.div>
 

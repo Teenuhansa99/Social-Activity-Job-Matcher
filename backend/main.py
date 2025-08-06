@@ -30,9 +30,16 @@ app.add_middleware(
 # Load model and embeddings once on startup
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-job_embeddings = np.load("model/job_embeddings.npy")
-job_data = pd.read_csv("model/job_data.csv")
+# Get the absolute path to the current file's directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Build absolute paths to the model files
+embeddings_path = os.path.join(BASE_DIR, "model", "job_embeddings.npy")
+data_path = os.path.join(BASE_DIR, "model", "job_data.csv")
+
+# Load files
+job_embeddings = np.load(embeddings_path)
+job_data = pd.read_csv(data_path)
 
 @app.post("/recommend")
 async def recommend(file: UploadFile = File(...)):

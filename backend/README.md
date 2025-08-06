@@ -65,6 +65,7 @@ Create a `.env` file in the backend directory:
 ```
 APIFY_API_TOKEN=your_apify_api_key_here
 ```
+Required for fetching live job listings via the Apify Indeed Scraper.
 
 **Do not commit `.env` to version control.**
 

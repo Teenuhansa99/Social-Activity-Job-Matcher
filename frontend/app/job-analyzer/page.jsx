@@ -9,6 +9,7 @@ const JobAnalyzer = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [analyzing, setAnalyzing] = useState(false);
     const [results, setResults] = useState(null);
+    const [topJobDetails, setTopJobDetails] = useState([]);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -36,6 +37,7 @@ const JobAnalyzer = () => {
                     match: `${Math.round(job.match_score * 100)}%`,
                 }))
             );
+            setTopJobDetails(data.top_job_details || []);
         } catch (err) {
             console.error(err);
             alert('Failed to analyze resume. Please try again.');
@@ -115,23 +117,65 @@ const JobAnalyzer = () => {
                         </div>
                     )}
                     {results && (
-                        <div className="space-y-4">
-                            {results.map((job, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-4 rounded-lg border border-white/10"
-                                >
-                                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                                        <h3 className="text-lg md:text-xl text-white">{job.title}</h3>
-                                        <span className="text-green-400 font-semibold mt-2 sm:mt-0">
-                                            {job.match}
-                                        </span>
+                        <div>
+                            {/* Top Recommendation */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-6 rounded-lg border border-white/20 mb-8"
+                            >
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                                    <h3 className="text-2xl md:text-3xl text-white font-bold">{results[0].title}</h3>
+                                    <span className="text-green-400 font-semibold mt-2 sm:mt-0 text-xl">
+                                        {results[0].match}
+                                    </span>
+                                </div>
+                                {/* Job Details from API */}
+                                <div className="mt-6">
+                                    <h4 className="text-lg text-white font-semibold mb-2">Live Job Listings</h4>
+                                    {topJobDetails.length === 0 && (
+                                        <div className="text-gray-400">No job details found.</div>
+                                    )}
+                                    <div className="grid gap-4">
+                                        {topJobDetails.map((job, idx) => (
+                                            <div key={idx} className="bg-[#232a36] p-4 rounded-lg border border-white/10">
+                                                {job.error ? (
+                                                    <span className="text-red-400">{job.error}</span>
+                                                ) : (
+                                                    <>
+                                                        <div className="text-white font-semibold">{job.title || job.position || 'No Title'}</div>
+                                                        <div className="text-gray-300 text-sm">{job.company || job.companyName || ''}</div>
+                                                        <div className="text-gray-400 text-xs mt-1">{job.location || ''}</div>
+                                                        {job.url && (
+                                                            <a href={job.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline text-xs">View Job</a>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
-                                </motion.div>
-                            ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Next 4 Recommendations in 2x2 Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {results.slice(1, 5).map((job, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-4 rounded-lg border border-white/10"
+                                    >
+                                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                                            <h3 className="text-lg md:text-xl text-white">{job.title}</h3>
+                                            <span className="text-green-400 font-semibold mt-2 sm:mt-0">
+                                                {job.match}
+                                            </span>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </motion.div>

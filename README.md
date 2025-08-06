@@ -30,6 +30,18 @@ PathFinder is a job recommendation web application that allows users to upload t
 
 ## Setup Instructions
 
+### Live Job Data Integration
+PathFinder uses the [Apify Indeed Scraper](https://apify.com/misceres/indeed-scraper) to fetch real-time job listings matching the top recommendation. To use this feature:
+
+1. Create an account at [Apify](https://apify.com)
+2. Get your API token
+3. Add the token to your backend `.env` file
+4. The system will automatically fetch live job listings including:
+   - Position details
+   - Company information
+   - Salary (when available)
+   - Application links
+   - Job type and location
 
 ### Backend
 
@@ -88,7 +100,6 @@ PathFinder is a job recommendation web application that allows users to upload t
 
 
 
-
 ## Model Explanation
 
 - **Embedding Model:** `sentence-transformers/all-MiniLM-L6-v2`
@@ -99,19 +110,6 @@ PathFinder is a job recommendation web application that allows users to upload t
   - Compared against precomputed job role embeddings
   - Top 5 jobs returned based on semantic similarity
   - Top job recommendation includes live job data fetched from Apify
-
-### Live Job Data Integration
-PathFinder uses the [Apify Indeed Scraper](https://apify.com/misceres/indeed-scraper) to fetch real-time job listings matching the top recommendation. To use this feature:
-
-1. Create an account at [Apify](https://apify.com)
-2. Get your API token
-3. Add the token to your backend `.env` file
-4. The system will automatically fetch live job listings including:
-   - Position details
-   - Company information
-   - Salary (when available)
-   - Application links
-   - Job type and location
 
 
 

@@ -21,9 +21,6 @@ const JobAnalyzer = () => {
     const handleAnalyze = async () => {
         if (!selectedFile) return;
         setAnalyzing(true);
-        setResults(null);
-        setTopRecommendation(null);
-        setTopJobDetails([]);
         try {
             const formData = new FormData();
             formData.append('file', selectedFile);
@@ -64,34 +61,77 @@ const JobAnalyzer = () => {
     };
 
     return (
-        <div className={`${styles.outer} min-h-screen bg-gradient-to-br from-[#232a36] via-[#232a36] to-[#232a36]`}>
+        <div className="min-h-screen bg-gradient-to-b from-[#13151a] to-[#090a0f]">
             <Navbar />
-            <div className="max-w-3xl mx-auto py-12 px-4">
+
+            <div className={`${styles.paddings} container mx-auto pt-8`}>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+                    Job Analyzer
+                </h1>
+
+                {/* --- File Picker on Top --- */}
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="backdrop-blur-md bg-[#1A232E]/30 p-6 md:p-8 rounded-xl border border-[#ffffff0f] shadow-xl bg-gradient-to-r from-purple-500/5 to-blue-500/5 mb-8"
+                >
+                    <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+                        Upload Profile
+                    </h2>
+                    <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 md:p-8 text-center">
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            className="hidden"
+                            id="fileInput"
+                            accept=".pdf"
+                        />
+                        <label
+                            htmlFor="fileInput"
+                            className="cursor-pointer bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 text-white px-6 py-3 rounded-lg inline-block transition-all duration-300 border border-white/10 hover:border-white/20"
+                        >
+                            Choose File
+                        </label>
+                        {selectedFile && (
+                            <p className="mt-4 text-gray-300 break-all">
+                                Selected: {selectedFile.name}
+                            </p>
+                        )}
+                        <button
+                            onClick={handleAnalyze}
+                            disabled={!selectedFile || analyzing}
+                            className={`mt-6 px-6 py-3 rounded-lg w-full md:w-auto ${!selectedFile || analyzing
+                                    ? 'bg-white/10 cursor-not-allowed'
+                                    : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90'
+                                } transition-all duration-300 text-white`}
+                        >
+                            {analyzing ? 'Analyzing...' : 'Analyze Resume'}
+                        </button>
+                    </div>
+                </motion.div>
+
+                {/* --- Results Below --- */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-[#232a36] p-8 rounded-lg shadow-lg border border-white/10"
+                    className="backdrop-blur-md bg-[#1A232E]/30 p-6 md:p-8 rounded-xl border border-[#ffffff0f] shadow-xl bg-gradient-to-r from-purple-500/5 to-blue-500/5"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Job Analyzer</h2>
-                    <div className="mb-6">
-                        <input
-                            type="file"
-                            accept=".pdf,.doc,.docx"
-                            onChange={handleFileChange}
-                            className="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                        />
-                    </div>
-                    <button
-                        onClick={handleAnalyze}
-                        disabled={!selectedFile || analyzing}
-                        className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg font-semibold shadow hover:from-purple-600 hover:to-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {analyzing ? 'Analyzing...' : 'Analyze Resume'}
-                    </button>
+                    <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+                        Job Recommendations
+                    </h2>
 
-                    {/* Results Section */}
+                    {!results && !analyzing && (
+                        <div className="text-center text-gray-400 py-8">
+                            Upload and analyze your resume to see job recommendations
+                        </div>
+                    )}
+                    {analyzing && (
+                        <div className="text-center text-gray-400 py-8">
+                            Analyzing your resume...
+                        </div>
+                    )}
                     {topRecommendation && (
-                        <>
+                        <div>
                             {/* Top Recommendation */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -108,7 +148,7 @@ const JobAnalyzer = () => {
 
                             {/* Next 4 Recommendations in 2x2 Grid */}
                             {results && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {results.map((job, i) => (
                                         <motion.div
                                             key={i}
@@ -156,16 +196,6 @@ const JobAnalyzer = () => {
                                     ))}
                                 </div>
                             </div>
-                        </>
-                    )}
-                    {!topRecommendation && !analyzing && (
-                        <div className="text-center text-gray-400 py-8">
-                            Upload and analyze your resume to see job recommendations
-                        </div>
-                    )}
-                    {analyzing && (
-                        <div className="text-center text-gray-400 py-8">
-                            Analyzing your resume...
                         </div>
                     )}
                 </motion.div>

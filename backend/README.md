@@ -2,6 +2,7 @@
 
 This is the FastAPI backend for **PathFinder**, a job recommendation system based on user-uploaded social media activity downloaded/printed documents (PDFs) and semantic similarity using pre-trained sentence embeddings.
 
+
 ## Features
 
 - Upload a user profile (PDF)
@@ -9,6 +10,7 @@ This is the FastAPI backend for **PathFinder**, a job recommendation system base
 - Encode user input with Sentence Transformers
 - Compare with precomputed job embeddings
 - Return top 5 job recommendations with similarity scores
+- Fetch live job details for the top recommendation using Apify API
 
 
 
@@ -21,6 +23,7 @@ This is the FastAPI backend for **PathFinder**, a job recommendation system base
 │   └── job_embeddings.npy  # Precomputed job description embeddings
 ├── main.py              # Main FastAPI app
 ├── requirements.txt
+├── .env                # API keys (not committed)
 └── README.md
 ```
 
@@ -55,7 +58,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Run the API
+### 3. Add your Apify API key
+
+Create a `.env` file in the backend directory:
+
+```
+APIFY_API_TOKEN=your_apify_api_key_here
+```
+
+**Do not commit `.env` to version control.**
+
+### 4. Run the API
 
 ```bash
 uvicorn main:app --reload
@@ -71,7 +84,10 @@ You can test the endpoint using the built-in Swagger UI:
 
 > Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-Upload a PDF containing social media activity (e.g., exported LinkedIn data) to `/recommend` endpoint and receive a JSON response with top 5 matched jobs.
+Upload a PDF containing social media activity (e.g., exported LinkedIn data) to `/recommend` endpoint and receive a JSON response with:
+
+- `recommendations`: Top 5 matched jobs
+- `top_job_details`: Live job listings for the top recommendation (from Apify)
 
 
 
@@ -79,20 +95,23 @@ Upload a PDF containing social media activity (e.g., exported LinkedIn data) to 
 
 Dependencies are managed in `requirements.txt`. Key packages include:
 
-* `fastapi`
-* `uvicorn`
-* `sentence-transformers`
-* `scikit-learn`
-* `pymupdf`
-* `pandas`
-* `numpy`
+- `fastapi`
+- `uvicorn`
+- `sentence-transformers`
+- `scikit-learn`
+- `pymupdf`
+- `pandas`
+- `numpy`
+- `apify-client`
+- `python-dotenv`
 
 
 
 ## Notes
 
-* The sentence-transformers model (`all-MiniLM-L6-v2`) is downloaded during first run. If hosting, consider pre-downloading or caching this to reduce cold start time.
-* Only `.pdf` files are accepted for profile input.
+- The sentence-transformers model (`all-MiniLM-L6-v2`) is downloaded during first run. If hosting, consider pre-downloading or caching this to reduce cold start time.
+- Only `.pdf` files are accepted for profile input.
+- `.env` file is required for Apify API integration and should not be committed.
 
 
 
@@ -101,6 +120,7 @@ Dependencies are managed in `requirements.txt`. Key packages include:
 * Embedding model: `sentence-transformers/all-MiniLM-L6-v2`
 * Similarity metric: Cosine Similarity
 * Job titles are filtered to ensure uniqueness in the top recommendations.
+* Top job recommendation includes live job data fetched from Apify.
 
 
 

@@ -16,6 +16,7 @@ PathFinder is a job recommendation web application that allows users to upload t
 
 
 
+
 ## Features
 
 - Upload social media activity documents (PDF)
@@ -23,10 +24,12 @@ PathFinder is a job recommendation web application that allows users to upload t
 - Semantic similarity matching with precomputed job embeddings
 - Top 5 job recommendations with similarity scores
 - Responsive, modern UI
+- Fetch live job details for the top recommendation using Apify API
 
 
 
 ## Setup Instructions
+
 
 ### Backend
 
@@ -48,11 +51,18 @@ PathFinder is a job recommendation web application that allows users to upload t
    ```bash
    pip install -r requirements.txt
    ```
-4. **Run the API**
+4. **Add your Apify API key**
+   Create a `.env` file in the backend directory:
+   ```
+   APIFY_API_TOKEN=your_apify_api_key_here
+   ```
+   **Do not commit `.env` to version control.**
+5. **Run the API**
    ```bash
    uvicorn main:app --reload
    ```
    The API will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
 
 ### Frontend
 
@@ -71,6 +81,12 @@ PathFinder is a job recommendation web application that allows users to upload t
    ```
    Visit [http://localhost:3000](http://localhost:3000)
 
+### Recommendation Display Structure
+
+- The top recommendation is displayed separately with live job details fetched from Apify.
+- The next 4 recommendations are shown in a 2x2 grid below the top result.
+
+
 
 
 ## Model Explanation
@@ -82,6 +98,7 @@ PathFinder is a job recommendation web application that allows users to upload t
   - Text is encoded into embeddings
   - Compared against precomputed job role embeddings
   - Top 5 jobs returned based on semantic similarity
+  - Top job recommendation includes live job data fetched from Apify
 
 
 

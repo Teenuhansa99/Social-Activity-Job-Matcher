@@ -46,7 +46,7 @@ export default function Home() {
                 Analyze My Profile
               </a>
               <a
-                href="#features"
+                href="/learn-more"
                 className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 border border-white/10 hover:border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
               >
                 Learn More

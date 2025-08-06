@@ -180,7 +180,7 @@ const JobAnalyzer = () => {
               )}
 
               {/* Live Job Listings for Top Recommendation */}
-              <div className="mt-6">
+              <div className="mt-12">
                 <h4 className="text-lg text-white font-semibold mb-2">
                   Live Job Listings for Top Recommendation
                 </h4>
@@ -246,14 +246,15 @@ const JobAnalyzer = () => {
                                 </div>
                               </div>
                             )}
-                            {job.rating && (
+                            {(typeof job.rating !== 'undefined' && job.rating !== null) || (typeof job.reviewsCount !== 'undefined' && job.reviewsCount !== null && job.reviewsCount !== 0) ? (
                               <div className="flex items-center">
                                 <div className="w-20 text-gray-400">Rating:</div>
                                 <div className="text-gray-300 flex-1">
-                                  {job.rating} ({job.reviewsCount} reviews)
+                                  {typeof job.rating !== 'undefined' && job.rating !== null ? job.rating : ''}
+                                  {typeof job.reviewsCount !== 'undefined' && job.reviewsCount !== null && job.reviewsCount !== 0 ? ` (${job.reviewsCount} reviews)` : ''}
                                 </div>
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         </div>
                       )}

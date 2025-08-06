@@ -23,8 +23,8 @@ flowchart TD
         K[User Uploads PDF]
         K --> L[Send to Backend API]
         L --> E
-        J --> M[Display Recommendations]
-        O --> P[Display Live Job Listings for Top Recommendation]
+        M[Display Recommendations]
+        P[Display Live Job Listings for Top Recommendation]
     end
 
     %% Communication

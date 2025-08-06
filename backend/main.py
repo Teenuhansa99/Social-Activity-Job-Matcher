@@ -2,12 +2,20 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+
 import fitz  # PyMuPDF
 import pandas as pd
 import numpy as np
 import uvicorn
 import io
+import os
+from apify_client import ApifyClient
+from dotenv import load_dotenv
 
+
+load_dotenv()
+APIFY_API_TOKEN = os.getenv("APIFY_API_TOKEN")
+apify_client = ApifyClient(APIFY_API_TOKEN) if APIFY_API_TOKEN else None
 app = FastAPI()
 
 # CORS if needed
@@ -49,13 +57,17 @@ async def recommend(file: UploadFile = File(...)):
     similarities = cosine_similarity([user_embedding], job_embeddings)[0]
     top_indices = similarities.argsort()[::-1]  # Sorted all
 
+
     seen_titles = set()
     recommendations = []
+    top_title = None
 
     for i in top_indices:
         title = job_data["title"][i]
         if title not in seen_titles:
             seen_titles.add(title)
+            if not top_title:
+                top_title = title
             recommendations.append({
                 "title": title,
                 "match_score": round(float(similarities[i]), 4)
@@ -63,7 +75,26 @@ async def recommend(file: UploadFile = File(...)):
         if len(recommendations) >= 5:
             break
 
-    return {"recommendations": recommendations}
+    job_details = []
+    if apify_client and top_title:
+        try:
+            run_input = {
+                "position": top_title,
+                "maxItems": 5,
+                "parseCompanyDetails": False,
+                "saveOnlyUniqueItems": True,
+                "followApplyRedirects": False,
+            }
+            run = apify_client.actor("hMvNSpz3JnHgl5jkh").call(run_input=run_input)
+            for item in apify_client.dataset(run["defaultDatasetId"]).iterate_items():
+                job_details.append(item)
+        except Exception as e:
+            job_details = [{"error": str(e)}]
+
+    return {
+        "recommendations": recommendations,
+        "top_job_details": job_details
+    }
 
 
 if __name__ == "__main__":

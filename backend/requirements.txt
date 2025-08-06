@@ -7,3 +7,5 @@ PyMuPDF
 sentence-transformers
 torch  # Required for sentence-transformers
 python-multipart
+apify-client
+python-dotenv

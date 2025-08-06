@@ -8,10 +8,10 @@ PathFinder is a job recommendation web application that enables users to upload 
 
 - Upload social media activity documents (PDF)
 - Seamless integration with the FastAPI backend
-- Displays top 5 job recommendations with similarity scores
+- Displays top 5 job recommendations: top result shown separately, next 4 in a 2x2 grid
 - Responsive design for desktop and mobile
 - Clear, actionable results based on semantic similarity
-- Fetches live job details for the top recommendation from backend API
+- Fetches live job details for the top recommendation asynchronously from backend API
 
 ## Tech Stack
 
@@ -65,15 +65,16 @@ frontend/
 ## Usage
 
 - Upload a PDF containing your social media activity (e.g., LinkedIn export)
-- View the top recommendation separately with live job details
+- View the top recommendation separately
 - View the next 4 recommendations in a 2x2 grid
+- Live job listings for the top recommendation are loaded asynchronously after initial results
 
 
 ## Notes
 
 - Only PDF files are accepted for upload
 - The backend uses the `all-MiniLM-L6-v2` model for semantic similarity
-- The backend integrates with Apify API to fetch live job details for the top recommendation
+- The backend provides `/live_jobs?position=<job_title>` endpoint to fetch live job details for the top recommendation asynchronously
 
 ## Contact
 

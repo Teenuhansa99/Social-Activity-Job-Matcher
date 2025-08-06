@@ -111,7 +111,7 @@ export default function LearnMore() {
             </InfoSection>
 
             {/* Technical Implementation */}
-            <InfoSection title="Technical Implementation" delay={0.3}>
+            {/* <InfoSection title="Technical Implementation" delay={0.3}>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium text-white mb-2">Backend Architecture</h4>
@@ -135,10 +135,10 @@ export default function LearnMore() {
                   </ul>
                 </div>
               </div>
-            </InfoSection>
+            </InfoSection> */}
 
             {/* Machine Learning Details */}
-            <InfoSection title="Machine Learning Details" delay={0.4}>
+            {/* <InfoSection title="Machine Learning Details" delay={0.4}>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium text-white mb-2">Embedding Model</h4>
@@ -164,7 +164,7 @@ export default function LearnMore() {
                   </CodeBlock>
                 </div>
               </div>
-            </InfoSection>
+            </InfoSection> */}
 
             {/* Data Privacy */}
             <InfoSection title="Data Privacy & Security" delay={0.5}>
@@ -181,7 +181,7 @@ export default function LearnMore() {
             </InfoSection>
 
             {/* Technology Stack */}
-            <InfoSection title="Technology Stack" delay={0.6}>
+            {/* <InfoSection title="Technology Stack" delay={0.6}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-medium text-white mb-3">Frontend</h4>
@@ -202,7 +202,7 @@ export default function LearnMore() {
                   </div>
                 </div>
               </div>
-            </InfoSection>
+            </InfoSection> */}
 
             {/* Supported Formats */}
             <InfoSection title="Supported File Formats" delay={0.7}>

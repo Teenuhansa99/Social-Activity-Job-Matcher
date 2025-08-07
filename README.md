@@ -113,21 +113,20 @@ PathFinder uses the [Apify Indeed Scraper](https://apify.com/misceres/indeed-scr
 
 
 
-<!-- ## Team Roles
+## Team Roles
 
-| Name            | Registration No | Team Role           |
-|-----------------|----------------|---------------------|
-| Achira Nadeeshan| 20210001       | Team Lead / Backend |
-| Nimal Perera    | 20210002       | Frontend Developer  |
-| Sahan Fernando  | 20210003       | Data Scientist      |
-| Dilani Silva    | 20210004       | UI/UX Designer      |
-| Kasun Jayasuriya| 20210005       | DevOps Engineer     |
-| Tharindu Wickramasinghe | 20210006 | QA Engineer        |
-| Ishara Gunawardena | 20210007    | NLP Engineer        |
-| Chamath Weerasinghe | 20210008   | Full Stack Developer|
-| Ruwani Abeysekara | 20210009     | Documentation Lead  |
-| Malith Senanayake | 20210010     | Research Analyst    | -->
-
+| Name                 | Registration No | Team Role                                             |
+|----------------------|-----------------|--------------------------------------------------------|
+| Achira Nadeeshan     | 22UG1-0723      | Team Lead, Full Stack Development, Presentation, Documentation |
+| H.M.K.S. Dedunupitiya| 22UG1-0812      | NLP Model, Presentation, Documentation                 |
+| Pasindu Nimsara      | 22UG1-0627      | Frontend Development, System Architecture Analysis     |
+| K.P. Dilhara         | 22UG1-0390      | Documentation Lead                                     |
+| T. Siriwardhana      | 22UG1-0126      | Data Scientist, System Architecture Analysis           |
+| H.L.V. Prasanjana    | 22UG1-0521      | DevOps Engineer                                        |
+| U.V.C.T. Jayathilaka | 22UG1-0380      | Full Stack Developer                                   |
+| S.P.A.S. Senarathne  | 22UG1-0345      | UI/UX Designer                                         |
+| Eranga Ekanayake     | 22UG1-0076      | Research Analyst                                       |
+| Dewmina Bandara      | 22UG1-0804      | QA Engineer                                            |
 
 
 ## License
